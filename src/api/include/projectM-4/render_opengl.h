@@ -63,6 +63,24 @@ PROJECTM_EXPORT void projectm_opengl_render_frame_fbo(projectm_handle instance, 
  */
 PROJECTM_EXPORT void projectm_opengl_burn_texture(projectm_handle instance, uint32_t texture, int left, int top, int width, int height);
 
+/**
+ * @brief Returns the OpenGL textures of the active preset, as of the last rendered frame.
+ *
+ * The output texture holds the preset's composited image. The motion vector texture (GL_RG16F)
+ * holds, for every pixel, the texture coordinate (u, v in 0..1) at which the warp sampled the
+ * previous frame; minus the pixel's own coordinate, that is how far the image moved there. Both
+ * have the render size. The IDs may change from frame to frame, so query them after each render.
+ * The textures belong to projectM: read them, do not modify or delete them.
+ *
+ * During a soft transition these are the outgoing preset's textures.
+ *
+ * @param instance The projectM instance handle.
+ * @param output_texture Receives the output texture ID, or 0 if there is no active preset. May be NULL.
+ * @param motion_vector_texture Receives the motion texture ID, or 0 if the preset has none. May be NULL.
+ * @since 4.2.0
+ */
+PROJECTM_EXPORT void projectm_opengl_get_preset_textures(projectm_handle instance, uint32_t* output_texture, uint32_t* motion_vector_texture);
+
 #ifdef __cplusplus
 } // extern "C"
 #endif

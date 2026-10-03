@@ -82,6 +82,8 @@ public:
 
     auto OutputTexture() const -> std::shared_ptr<Renderer::Texture> override;
 
+    auto MotionVectorTexture() const -> std::shared_ptr<Renderer::Texture> override;
+
     void DrawInitialImage(const std::shared_ptr<Renderer::Texture>& image, const Renderer::RenderContext& renderContext) override;
 
     void BindFramebuffer() override;

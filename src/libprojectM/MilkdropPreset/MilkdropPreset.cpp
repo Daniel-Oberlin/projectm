@@ -179,6 +179,11 @@ auto MilkdropPreset::OutputTexture() const -> std::shared_ptr<Renderer::Texture>
     return m_framebuffer.GetColorAttachmentTexture(m_currentFrameBuffer, 0);
 }
 
+auto MilkdropPreset::MotionVectorTexture() const -> std::shared_ptr<Renderer::Texture>
+{
+    return m_motionVectorUVMap->Texture();
+}
+
 void MilkdropPreset::DrawInitialImage(const std::shared_ptr<Renderer::Texture>& image, const Renderer::RenderContext& renderContext)
 {
     m_framebuffer.SetSize(renderContext.viewportSizeX, renderContext.viewportSizeY);

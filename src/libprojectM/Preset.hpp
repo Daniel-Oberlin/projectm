@@ -47,6 +47,17 @@ public:
     virtual auto OutputTexture() const -> std::shared_ptr<Renderer::Texture> = 0;
 
     /**
+     * @brief Returns the motion map of the last frame, if the preset has one.
+     * Per pixel, the texture coordinate at which the warp sampled the previous frame. The default
+     * returns nothing.
+     * @return A pointer to the motion map texture, or nullptr.
+     */
+    virtual auto MotionVectorTexture() const -> std::shared_ptr<Renderer::Texture>
+    {
+        return {};
+    }
+
+    /**
      * @brief Draws an initial image into the preset, e.g. the last frame of a previous preset.
      * It's not guaranteed a preset supports using a previously rendered image. If not
      * supported, this call is simply a no-op.

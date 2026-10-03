@@ -248,6 +248,22 @@ void projectm_opengl_render_frame_fbo(projectm_handle instance, uint32_t framebu
     projectMInstance->RenderFrame(framebuffer_object_id);
 }
 
+void projectm_opengl_get_preset_textures(projectm_handle instance, uint32_t* output_texture, uint32_t* motion_vector_texture)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    uint32_t output{};
+    uint32_t motion{};
+    projectMInstance->GetActivePresetTextures(output, motion);
+    if (output_texture != nullptr)
+    {
+        *output_texture = output;
+    }
+    if (motion_vector_texture != nullptr)
+    {
+        *motion_vector_texture = motion;
+    }
+}
+
 void projectm_opengl_burn_texture(projectm_handle instance, uint32_t texture, int left, int top, int width, int height)
 {
     auto projectMInstance = handle_to_instance(instance);

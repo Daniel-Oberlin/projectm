@@ -435,6 +435,24 @@ void ProjectM::SetRandomSeed(uint32_t seed)
     m_randomSeed = seed;
 }
 
+void ProjectM::GetActivePresetTextures(uint32_t& outputTexture, uint32_t& motionVectorTexture) const
+{
+    outputTexture = 0;
+    motionVectorTexture = 0;
+    if (!m_activePreset)
+    {
+        return;
+    }
+    if (auto texture = m_activePreset->OutputTexture())
+    {
+        outputTexture = texture->TextureID();
+    }
+    if (auto texture = m_activePreset->MotionVectorTexture())
+    {
+        motionVectorTexture = texture->TextureID();
+    }
+}
+
 void ProjectM::SetFrameTime(double secondsSinceStart)
 {
     m_timeKeeper->SetFrameTime(secondsSinceStart);

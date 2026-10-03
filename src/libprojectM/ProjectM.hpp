@@ -233,6 +233,13 @@ public:
      */
     void SetRandomSeed(uint32_t seed);
 
+    /**
+     * @brief Returns the GL texture IDs of the active preset's output image and motion map.
+     * @param outputTexture Receives the output image's texture ID, or 0.
+     * @param motionVectorTexture Receives the motion map's texture ID, or 0.
+     */
+    void GetActivePresetTextures(uint32_t& outputTexture, uint32_t& motionVectorTexture) const;
+
     auto PCM() -> Audio::PCM&;
 
     auto WindowWidth() -> int;
