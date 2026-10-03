@@ -29,6 +29,7 @@
 
 #include <cstdint>
 #include <istream>
+#include <optional>
 #include <memory>
 #include <string>
 #include <vector>
@@ -130,6 +131,12 @@ public:
     void SetFrameTime(double secondsSinceStart);
 
     /**
+     * @brief Sets the number of the next frame, the preset variable "frame".
+     * @param frameCount The number of the next frame to render.
+     */
+    void SetFrameCount(uint32_t frameCount);
+
+    /**
      * @brief Gets the time of the last frame rendered.
      * @note This will not return the value set with SetFrameTime, but the actual time used to render the last frame.
      *       If a user-specified frame time was set, this value is returned. Otherwise, the frame time measured via the
@@ -219,6 +226,12 @@ public:
      * @return True if presets start with a clean canvas.
      */
     auto PresetStartClean() const -> bool;
+
+    /**
+     * @brief Derives all random values of presets and transitions started from now on from a seed.
+     * @param seed The seed.
+     */
+    void SetRandomSeed(uint32_t seed);
 
     auto PCM() -> Audio::PCM&;
 
@@ -334,6 +347,7 @@ private:
     bool m_presetLocked{false};         //!< If true, the preset change event will not be sent.
     bool m_presetChangeNotified{false}; //!< Stores whether the user has been notified that projectM wants to switch the preset.
     bool m_presetStartClean{false};     //!< If true, new presets start with a black canvas instead of the previous frame.
+    std::optional<uint32_t> m_randomSeed; //!< If set, every preset load and transition is seeded from it.
 
     std::unique_ptr<PresetFactoryManager> m_presetFactoryManager; //!< Provides access to all available preset factories.
 

@@ -7,6 +7,7 @@
 
 #include <glm/glm.hpp>
 
+#include <optional>
 #include <random>
 
 namespace libprojectM {
@@ -25,10 +26,12 @@ public:
      * @param transitionShader The transition shader program.
      * @param durationSeconds Transition duration in seconds.
      * @param transitionStartTime The time in seconds since start of projectM.
+     * @param seed If set, the transition's random values are derived from it.
      */
     explicit PresetTransition(const std::shared_ptr<Shader>& transitionShader,
                               double durationSeconds,
-                              double transitionStartTime);
+                              double transitionStartTime,
+                              std::optional<uint32_t> seed = {});
 
     /**
      * @brief Returns true if the transition is done.
@@ -80,7 +83,7 @@ private:
 
     glm::ivec4 m_staticRandomValues{}; //!< Four random integers, remaining static during the whole transition.
 
-    std::random_device m_randomDevice; //!< Seed for the random number generator
+    std::mt19937 m_randomGenerator; //!< Random values for the transition shader, per transition
 };
 
 } // namespace Renderer

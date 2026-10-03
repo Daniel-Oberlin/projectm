@@ -19,7 +19,12 @@ PresetState::PresetState()
     : globalMemory(projectm_eval_memory_buffer_create())
 {
     std::random_device randomDevice;
-    std::mt19937 randomGenerator(randomDevice());
+    SetRandomSeed(randomDevice());
+}
+
+void PresetState::SetRandomSeed(uint32_t seed)
+{
+    std::mt19937 randomGenerator(seed);
     std::uniform_int_distribution<> distrib(0, std::numeric_limits<int>::max());
 
     hueRandomOffsets[0] = static_cast<float>(distrib(randomGenerator) % 64841L) * 0.01f;

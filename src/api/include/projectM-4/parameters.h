@@ -82,6 +82,20 @@ PROJECTM_EXPORT void projectm_set_frame_time(projectm_handle instance, double se
 PROJECTM_EXPORT double projectm_get_last_frame_time(projectm_handle instance);
 
 /**
+ * @brief Sets the number of frames rendered so far, i.e. the number of the next frame.
+ *
+ * The count is the preset variable "frame" and selects the loudness analysis' start-up phase
+ * (the first 50 frames). It normally counts the frames this instance has rendered. An application
+ * that renders frame N of a shared timeline, e.g. an instance that starts later than others and
+ * must draw the same pictures, sets it to N before rendering, together with projectm_set_frame_time.
+ *
+ * @param instance The projectM instance handle.
+ * @param frame_count The number of the next frame to render.
+ * @since 4.2.0
+ */
+PROJECTM_EXPORT void projectm_set_frame_count(projectm_handle instance, uint32_t frame_count);
+
+/**
  * @brief Sets the beat sensitivity.
  *
  * The beat sensitivity to be used.
@@ -393,6 +407,28 @@ PROJECTM_EXPORT void projectm_set_preset_start_clean(projectm_handle instance, b
  * @since 4.2.0
  */
 PROJECTM_EXPORT bool projectm_get_preset_start_clean(projectm_handle instance);
+
+/**
+ * @brief Derives all random values of presets and transitions started from now on from a seed.
+ *
+ * Without a seed, presets and transitions take their random values from std::random_device, so
+ * two instances fed the same audio at the same frame times still draw different pictures. With a
+ * seed, each preset load reseeds the generator behind the expression rand() function, derives the
+ * preset's hue offsets and its randomised duration (which presets read as "progress") from the
+ * seed, and each soft transition derives its shader choice and random values from it. The picture
+ * then depends only on the presets, the audio, the frame times, the frame count and the settings.
+ * Call it again before a load to give that preset a different seed.
+ *
+ * Not covered: the random values of presets with shader code (rand_frame, rand_preset, noise
+ * textures, random textures).
+ *
+ * The expression rand() generator is shared by all instances in the process.
+ *
+ * @param instance The projectM instance handle.
+ * @param seed The seed.
+ * @since 4.2.0
+ */
+PROJECTM_EXPORT void projectm_set_random_seed(projectm_handle instance, uint32_t seed);
 
 #ifdef __cplusplus
 } // extern "C"

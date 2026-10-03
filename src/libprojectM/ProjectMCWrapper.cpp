@@ -260,6 +260,12 @@ void projectm_set_frame_time(projectm_handle instance, double seconds_since_firs
     projectMInstance->SetFrameTime(seconds_since_first_frame);
 }
 
+void projectm_set_frame_count(projectm_handle instance, uint32_t frame_count)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->SetFrameCount(frame_count);
+}
+
 double projectm_get_last_frame_time(projectm_handle instance)
 {
     auto projectMInstance = handle_to_instance(instance);
@@ -460,6 +466,12 @@ bool projectm_get_preset_start_clean(projectm_handle instance)
 {
     auto projectMInstance = handle_to_instance(instance);
     return projectMInstance->PresetStartClean();
+}
+
+void projectm_set_random_seed(projectm_handle instance, uint32_t seed)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->SetRandomSeed(seed);
 }
 
 unsigned int projectm_pcm_get_max_samples()

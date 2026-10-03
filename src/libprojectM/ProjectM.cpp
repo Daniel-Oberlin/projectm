@@ -294,6 +294,13 @@ void ProjectM::StartPresetTransition(std::unique_ptr<Preset>&& preset, bool hard
         return;
     }
 
+    if (m_randomSeed.has_value())
+    {
+        preset->SetRandomSeed(*m_randomSeed);
+        // The preset's duration is random too, and presets can read it through "progress".
+        m_timeKeeper->SetRandomSeed(*m_randomSeed);
+    }
+
     preset->Initialize(GetRenderContext());
 
     // If already in a transition, force immediate completion.
@@ -317,7 +324,14 @@ void ProjectM::StartPresetTransition(std::unique_ptr<Preset>&& preset, bool hard
     {
         m_transitioningPreset = std::move(preset);
         m_timeKeeper->StartSmoothing();
-        m_transition = std::make_unique<Renderer::PresetTransition>(m_transitionShaderManager->RandomTransition(), m_softCutDuration, m_timeKeeper->GetFrameTime());
+        if (m_randomSeed.has_value())
+        {
+            m_transition = std::make_unique<Renderer::PresetTransition>(m_transitionShaderManager->RandomTransition(*m_randomSeed), m_softCutDuration, m_timeKeeper->GetFrameTime(), *m_randomSeed);
+        }
+        else
+        {
+            m_transition = std::make_unique<Renderer::PresetTransition>(m_transitionShaderManager->RandomTransition(), m_softCutDuration, m_timeKeeper->GetFrameTime());
+        }
     }
 }
 
@@ -416,9 +430,19 @@ auto ProjectM::PresetStartClean() const -> bool
     return m_presetStartClean;
 }
 
+void ProjectM::SetRandomSeed(uint32_t seed)
+{
+    m_randomSeed = seed;
+}
+
 void ProjectM::SetFrameTime(double secondsSinceStart)
 {
     m_timeKeeper->SetFrameTime(secondsSinceStart);
+}
+
+void ProjectM::SetFrameCount(uint32_t frameCount)
+{
+    m_frameCount = static_cast<int>(frameCount);
 }
 
 double ProjectM::GetFrameTime()

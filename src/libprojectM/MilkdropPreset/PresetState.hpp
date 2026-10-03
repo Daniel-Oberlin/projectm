@@ -40,6 +40,12 @@ public:
     ~PresetState();
 
     /**
+     * @brief Derives the per-preset random values (the hue offsets) from a seed.
+     * @param seed The seed.
+     */
+    void SetRandomSeed(uint32_t seed);
+
+    /**
      * @brief Loads the initial values and code from the preset file.
      * @param parsedFile The file parser with the preset data.
      */

@@ -26,6 +26,17 @@ auto TransitionShaderManager::RandomTransition() -> std::shared_ptr<Shader>
     return m_transitionShaders.at(m_mersenneTwister() % m_transitionShaders.size());
 }
 
+auto TransitionShaderManager::RandomTransition(uint32_t seed) -> std::shared_ptr<Shader>
+{
+    if (m_transitionShaders.empty())
+    {
+        return {};
+    }
+
+    std::mt19937 randomGenerator(seed);
+    return m_transitionShaders.at(randomGenerator() % m_transitionShaders.size());
+}
+
 auto TransitionShaderManager::CompileTransitionShader(const std::string& shaderBodyCode) -> std::shared_ptr<Shader>
 {
 #ifdef USE_GLES

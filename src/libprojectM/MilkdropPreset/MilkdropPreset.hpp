@@ -86,6 +86,8 @@ public:
 
     void BindFramebuffer() override;
 
+    void SetRandomSeed(uint32_t seed) override;
+
 private:
     void PerFrameUpdate();
 

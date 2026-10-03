@@ -53,6 +53,14 @@ MilkdropPreset::MilkdropPreset(std::istream& presetData)
     Load(presetData);
 }
 
+void MilkdropPreset::SetRandomSeed(uint32_t seed)
+{
+    m_state.SetRandomSeed(seed);
+    // The expression rand() generator is process-wide; reseeding it here covers the init code run
+    // by Initialize() and every frame after it.
+    projectm_eval_set_random_seed(seed);
+}
+
 void MilkdropPreset::Initialize(const Renderer::RenderContext& renderContext)
 {
     assert(renderContext.textureManager);

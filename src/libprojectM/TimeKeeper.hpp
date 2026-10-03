@@ -19,6 +19,12 @@ public:
     void SetFrameTime(double secondsSinceStart);
 
     /**
+     * @brief Reseeds the generator behind the randomised preset durations.
+     * @param seed The seed.
+     */
+    void SetRandomSeed(uint32_t seed);
+
+    /**
      * @brief Gets the time of the last frame rendered.
      * @note This will not return the value set with SetFrameTime, but the actual time used to render the last frame.
      *       If a user-specified frame time was set, this value is returned. Otherwise, the frame time measured via the

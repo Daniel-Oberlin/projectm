@@ -21,6 +21,13 @@ public:
      */
     auto RandomTransition() -> std::shared_ptr<Shader>;
 
+    /**
+     * @brief Selects a transition shader from the list, chosen by a seed.
+     * @param seed The seed.
+     * @return The same shader for the same seed.
+     */
+    auto RandomTransition(uint32_t seed) -> std::shared_ptr<Shader>;
+
 private:
     /**
      * @brief Compiles a single transition shader program.

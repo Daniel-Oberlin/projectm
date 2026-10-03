@@ -22,6 +22,15 @@ public:
     virtual void Initialize(const Renderer::RenderContext& renderContext) = 0;
 
     /**
+     * @brief Replaces the preset's random values with ones derived from a seed.
+     * Called before Initialize(). The default does nothing.
+     * @param seed The seed.
+     */
+    virtual void SetRandomSeed(uint32_t /*seed*/)
+    {
+    }
+
+    /**
      * @brief Renders the preset into the current framebuffer.
      * @param audioData Audio data to be used by the preset.
      * @param renderContext The current render context data.

@@ -11,12 +11,19 @@ TimeKeeper::TimeKeeper(double presetDuration, double smoothDuration, double hard
     , m_softCutDuration(smoothDuration)
     , m_hardCutDuration(hardcutDuration)
 {
-    UpdateTimers();
+    // No clock read here: until the first frame, the current time is 0. Reading the wall clock
+    // would leak into the first preset's start time and the first frame's time step even when
+    // the application sets every frame time itself.
 }
 
 void TimeKeeper::SetFrameTime(double secondsSinceStart)
 {
     m_userSpecifiedTime = secondsSinceStart;
+}
+
+void TimeKeeper::SetRandomSeed(uint32_t seed)
+{
+    m_randomGenerator.seed(seed);
 }
 
 double TimeKeeper::GetFrameTime() const

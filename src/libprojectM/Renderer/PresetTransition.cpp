@@ -10,7 +10,7 @@ namespace Renderer {
 
 constexpr double PI = 3.14159265358979323846;
 
-PresetTransition::PresetTransition(const std::shared_ptr<Shader>& transitionShader, double durationSeconds, double transitionStartTime)
+PresetTransition::PresetTransition(const std::shared_ptr<Shader>& transitionShader, double durationSeconds, double transitionStartTime, std::optional<uint32_t> seed)
     : m_mesh(VertexBufferUsage::StaticDraw)
     , m_transitionShader(transitionShader)
     , m_durationSeconds(durationSeconds)
@@ -27,8 +27,16 @@ PresetTransition::PresetTransition(const std::shared_ptr<Shader>& transitionShad
 
     m_mesh.Update();
 
-    std::mt19937 rand32(m_randomDevice());
-    m_staticRandomValues = {rand32(), rand32(), rand32(), rand32()};
+    if (seed.has_value())
+    {
+        m_randomGenerator.seed(*seed);
+    }
+    else
+    {
+        std::random_device randomDevice;
+        m_randomGenerator.seed(randomDevice());
+    }
+    m_staticRandomValues = {m_randomGenerator(), m_randomGenerator(), m_randomGenerator(), m_randomGenerator()};
 }
 
 auto PresetTransition::IsDone(double currentFrameTime) const -> bool
@@ -53,7 +61,7 @@ void PresetTransition::Draw(const Preset& oldPreset,
         return;
     }
 
-    std::mt19937 rand32(m_randomDevice());
+    auto& rand32 = m_randomGenerator;
 
     // Calculate progress values
     const auto secondsSinceStart = currentFrameTime - m_transitionStartTime;
