@@ -96,6 +96,20 @@ PROJECTM_EXPORT double projectm_get_last_frame_time(projectm_handle instance);
 PROJECTM_EXPORT void projectm_set_frame_count(projectm_handle instance, uint32_t frame_count);
 
 /**
+ * @brief Sets the preset variable "eye", for stereo drawn by the preset itself.
+ *
+ * An application can run one instance per eye, fed the same audio, seed and frame times, and set
+ * -1 on the left eye's instance and +1 on the right's. A preset then gives what it draws a depth,
+ * e.g. "x = x + eye * 0.01 * bass" in a custom wave, and the two pictures differ only there.
+ * Presets that do not read "eye" draw the same picture for both eyes.
+ *
+ * @param instance The projectM instance handle.
+ * @param eye -1 left, +1 right, 0 both. Default: 0.
+ * @since 4.2.0
+ */
+PROJECTM_EXPORT void projectm_set_eye(projectm_handle instance, float eye);
+
+/**
  * @brief Sets the beat sensitivity.
  *
  * The beat sensitivity to be used.

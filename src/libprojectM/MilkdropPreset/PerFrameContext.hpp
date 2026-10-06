@@ -94,6 +94,7 @@ public:
     PRJM_EVAL_F* wave_mode{};
     PRJM_EVAL_F* decay{};
     PRJM_EVAL_F* frame{};
+    PRJM_EVAL_F* eye{};
     PRJM_EVAL_F* q_vars[QVarCount]{};
     PRJM_EVAL_F* progress{};
     PRJM_EVAL_F* ob_size{};

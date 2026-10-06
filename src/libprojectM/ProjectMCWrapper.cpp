@@ -282,6 +282,12 @@ void projectm_set_frame_count(projectm_handle instance, uint32_t frame_count)
     projectMInstance->SetFrameCount(frame_count);
 }
 
+void projectm_set_eye(projectm_handle instance, float eye)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->SetEye(eye);
+}
+
 double projectm_get_last_frame_time(projectm_handle instance)
 {
     auto projectMInstance = handle_to_instance(instance);

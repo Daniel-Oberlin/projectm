@@ -67,6 +67,7 @@ public:
     PRJM_EVAL_F* time{};
     PRJM_EVAL_F* fps{};
     PRJM_EVAL_F* frame{};
+    PRJM_EVAL_F* eye{};
     PRJM_EVAL_F* progress{};
     PRJM_EVAL_F* q_vars[QVarCount]{};
     PRJM_EVAL_F* t_vars[TVarCount]{};

@@ -51,6 +51,7 @@ void PerFrameContext::RegisterBuiltinVariables()
     REG_VAR(mid_att);
     REG_VAR(treb_att);
     REG_VAR(frame);
+    REG_VAR(eye);
     REG_VAR(decay);
     REG_VAR(wave_a);
     REG_VAR(wave_r);
@@ -173,6 +174,7 @@ void PerFrameContext::LoadStateVariables(PresetState& state)
     *mid_att = static_cast<PRJM_EVAL_F>(state.audioData.midAtt);
     *treb_att = static_cast<PRJM_EVAL_F>(state.audioData.trebAtt);
     *frame = static_cast<PRJM_EVAL_F>(state.renderContext.frame);
+    *eye = static_cast<PRJM_EVAL_F>(state.renderContext.eye);
     for (int q = 0; q < QVarCount; q++)
     {
         *q_vars[q] = q_values_after_init_code[q];

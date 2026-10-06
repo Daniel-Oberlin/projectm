@@ -36,6 +36,7 @@ void ShapePerFrameContext::RegisterBuiltinVariables()
     REG_VAR(time);
     REG_VAR(fps);
     REG_VAR(frame);
+    REG_VAR(eye);
     REG_VAR(progress);
 
     for (int q = 0; q < QVarCount; q++)
@@ -87,6 +88,7 @@ void ShapePerFrameContext::LoadStateVariables(const PresetState& state,
 {
     *time = static_cast<double>(state.renderContext.time);
     *frame = static_cast<double>(state.renderContext.frame);
+    *eye = static_cast<double>(state.renderContext.eye);
     *fps = static_cast<double>(state.renderContext.fps);
     *progress = static_cast<double>(state.renderContext.progress);
     *bass = static_cast<double>(state.audioData.bass);

@@ -52,6 +52,7 @@ void PerPixelContext::RegisterBuiltinVariables()
     REG_VAR(mid_att);
     REG_VAR(treb_att);
     REG_VAR(frame);
+    REG_VAR(eye);
     REG_VAR(x);
     REG_VAR(y);
     REG_VAR(rad);
@@ -75,6 +76,7 @@ void PerPixelContext::LoadStateReadOnlyVariables(PresetState& state, PerFrameCon
     *time = static_cast<PRJM_EVAL_F>(*perFrameState.time);
     *fps = static_cast<PRJM_EVAL_F>(*perFrameState.fps);
     *frame = static_cast<PRJM_EVAL_F>(*perFrameState.frame);
+    *eye = static_cast<PRJM_EVAL_F>(*perFrameState.eye);
     *progress = static_cast<PRJM_EVAL_F>(*perFrameState.progress);
     *bass = static_cast<PRJM_EVAL_F>(*perFrameState.bass);
     *mid = static_cast<PRJM_EVAL_F>(*perFrameState.mid);

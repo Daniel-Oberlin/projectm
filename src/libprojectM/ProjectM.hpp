@@ -137,6 +137,12 @@ public:
     void SetFrameCount(uint32_t frameCount);
 
     /**
+     * @brief Sets the preset variable "eye": -1 left, +1 right, 0 both (the default).
+     * @param eye The eye this instance draws for.
+     */
+    void SetEye(float eye);
+
+    /**
      * @brief Gets the time of the last frame rendered.
      * @note This will not return the value set with SetFrameTime, but the actual time used to render the last frame.
      *       If a user-specified frame time was set, this value is returned. Otherwise, the frame time measured via the
@@ -354,6 +360,7 @@ private:
     bool m_presetLocked{false};         //!< If true, the preset change event will not be sent.
     bool m_presetChangeNotified{false}; //!< Stores whether the user has been notified that projectM wants to switch the preset.
     bool m_presetStartClean{false};     //!< If true, new presets start with a black canvas instead of the previous frame.
+    float m_eye{0.0f};                  //!< The preset variable "eye".
     std::optional<uint32_t> m_randomSeed; //!< If set, every preset load and transition is seeded from it.
 
     std::unique_ptr<PresetFactoryManager> m_presetFactoryManager; //!< Provides access to all available preset factories.

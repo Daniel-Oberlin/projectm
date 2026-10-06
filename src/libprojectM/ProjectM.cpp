@@ -463,6 +463,11 @@ void ProjectM::SetFrameCount(uint32_t frameCount)
     m_frameCount = static_cast<int>(frameCount);
 }
 
+void ProjectM::SetEye(float eye)
+{
+    m_eye = eye;
+}
+
 double ProjectM::GetFrameTime()
 {
     return m_timeKeeper->GetFrameTime();
@@ -634,6 +639,7 @@ auto ProjectM::GetRenderContext() -> Renderer::RenderContext
     ctx.progress = static_cast<float>(m_timeKeeper->PresetProgressA());
     ctx.fps = static_cast<float>(m_targetFps);
     ctx.frame = m_frameCount;
+    ctx.eye = m_eye;
     ctx.aspectX = (m_windowHeight > m_windowWidth) ? static_cast<float>(m_windowWidth) / static_cast<float>(m_windowHeight) : 1.0f;
     ctx.aspectY = (m_windowWidth > m_windowHeight) ? static_cast<float>(m_windowHeight) / static_cast<float>(m_windowWidth) : 1.0f;
     ctx.invAspectX = 1.0f / ctx.aspectX;

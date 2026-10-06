@@ -37,6 +37,7 @@ void WaveformPerPointContext::RegisterBuiltinVariables()
     REG_VAR(time);
     REG_VAR(fps);
     REG_VAR(frame);
+    REG_VAR(eye);
     REG_VAR(progress);
 
     for (int q = 0; q < QVarCount; q++)
@@ -72,6 +73,7 @@ void WaveformPerPointContext::LoadReadOnlyStateVariables(const PerFrameContext& 
 {
     *time = *presetPerFrameContext.time;
     *frame = *presetPerFrameContext.frame;
+    *eye = *presetPerFrameContext.eye;
     *fps = *presetPerFrameContext.fps;
     *progress = *presetPerFrameContext.progress;
     *bass = *presetPerFrameContext.bass;

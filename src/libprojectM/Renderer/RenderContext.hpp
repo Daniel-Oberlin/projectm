@@ -20,6 +20,7 @@ class PROJECTM_CXX_EXPORT RenderContext
 public:
     float time{0.0f};          //!< Time since the preset started, in seconds.
     int frame{0};              //!< Frames rendered so far.
+    float eye{0.0f};           //!< Which eye this instance draws for: -1 left, +1 right, 0 both. Preset variable "eye".
     float fps{0.0f};           //!< Frames per second.
     float progress{0.0f};      //!< Preset progress.
     float blendProgress{0.0f}; //!< Preset transition/blending progress.
