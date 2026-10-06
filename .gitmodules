@@ -1,4 +1,4 @@
 [submodule "vendor/projectm-eval"]
 	path = vendor/projectm-eval
 	url = https://github.com/Daniel-Oberlin/projectm-eval.git
-	branch = e9-eye
+	branch = mmersion
