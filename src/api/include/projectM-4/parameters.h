@@ -436,7 +436,8 @@ PROJECTM_EXPORT bool projectm_get_preset_start_clean(projectm_handle instance);
  * Not covered: the random values of presets with shader code (rand_frame, rand_preset, noise
  * textures, random textures).
  *
- * The expression rand() generator is shared by all instances in the process.
+ * Each preset has its own expression rand() generator, so several instances in one process (e.g.
+ * one per eye) do not disturb each other's random sequences.
  *
  * @param instance The projectM instance handle.
  * @param seed The seed.
