@@ -288,6 +288,12 @@ void projectm_set_eye(projectm_handle instance, float eye)
     projectMInstance->SetEye(eye);
 }
 
+void projectm_update_audio(projectm_handle instance)
+{
+    auto projectMInstance = handle_to_instance(instance);
+    projectMInstance->UpdateWithoutRendering();
+}
+
 double projectm_get_last_frame_time(projectm_handle instance)
 {
     auto projectMInstance = handle_to_instance(instance);

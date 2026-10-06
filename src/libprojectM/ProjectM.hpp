@@ -143,6 +143,11 @@ public:
     void SetEye(float eye);
 
     /**
+     * @brief Advances time, audio analysis and frame count by one frame without rendering.
+     */
+    void UpdateWithoutRendering();
+
+    /**
      * @brief Gets the time of the last frame rendered.
      * @note This will not return the value set with SetFrameTime, but the actual time used to render the last frame.
      *       If a user-specified frame time was set, this value is returned. Otherwise, the frame time measured via the

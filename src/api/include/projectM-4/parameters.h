@@ -110,6 +110,19 @@ PROJECTM_EXPORT void projectm_set_frame_count(projectm_handle instance, uint32_t
 PROJECTM_EXPORT void projectm_set_eye(projectm_handle instance, float eye);
 
 /**
+ * @brief Takes one frame's step of time, audio analysis and frame count, without rendering.
+ *
+ * Call it in place of a render call for a frame that is not drawn. The instance's audio state
+ * (the loudness averages behind bass, bass_att, ...) then stays the same as that of an instance
+ * that rendered every frame with the same audio and frame times, so that it can take over, or
+ * start drawing the other eye, at any frame. Also cheap for catching up a late joiner.
+ *
+ * @param instance The projectM instance handle.
+ * @since 4.2.0
+ */
+PROJECTM_EXPORT void projectm_update_audio(projectm_handle instance);
+
+/**
  * @brief Sets the beat sensitivity.
  *
  * The beat sensitivity to be used.

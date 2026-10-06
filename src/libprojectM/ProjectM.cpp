@@ -113,6 +113,15 @@ void ProjectM::SetTextureLoadCallback(Renderer::TextureLoadCallback callback)
     }
 }
 
+void ProjectM::UpdateWithoutRendering()
+{
+    // The same steps as the start and end of RenderFrame(), without the preset and drawing.
+    m_timeKeeper->UpdateTimers();
+    m_audioStorage.UpdateFrameAudioData(m_timeKeeper->SecondsSinceLastFrame(), m_frameCount);
+    m_previousFrameVolume = m_audioStorage.GetFrameAudioData().vol;
+    m_frameCount++;
+}
+
 void ProjectM::RenderFrame(uint32_t targetFramebufferObject /*= 0*/)
 {
     // Don't render if window area is zero.
